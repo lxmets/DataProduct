@@ -1,1 +1,222 @@
-default
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Water Footprint Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Water Footprint Calculator">
+  <meta name="author" content="WFP">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Water Footprint Calculator</h1>
+    <h2>(calculates at a weekly granularity)</h2>
+    <p>WFP<br/>Data Science</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <article data-timings="">
+    <style>
+.title-slide {
+  background-color: #cce5ff; 
+}
+.title-slide hgroup > h1{
+  font-family: 'Oswald', sans-serif;
+}
+
+.title-slide hgroup > h2{
+  font-family: 'Oswald', 'Calibri', sans-serif;
+}
+
+/* Fonts and Spacing */
+article p, article li, article li.build, section p, section li{
+  font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
+  text-align: justify;
+  font-size:22px;
+  line-height: 1.5em;
+  color: #444;
+}
+
+slide:not(.segue) h2{
+  font-family: 'Calibri', Arial, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: bold;
+  text-transform: normal;
+  letter-spacing: -2px;
+  line-height: 1.2em;
+/*  color: #193441;*/
+/*  color: #02574D;*/
+  color: #CC2904;
+}
+body {
+  background-color: #cce5ff;
+}
+</style>
+
+<style>
+em {
+  font-style: italic
+}
+</style>
+
+<style>
+strong {
+  font-weight: bold;
+}
+</style>
+
+<h2>What is a Water Footprint?</h2>
+
+<h3>Water footprint of a consumer -</h3>
+
+<p>Is defined as the total volume of freshwater consumed and polluted for the production of the goods and services consumed by the consumer. It is calculated by adding the direct water use by people and their indirect water use. The latter can be found 
+by multiplying all goods and services consumed by their respective water footprint.</p>
+
+<p>(Source: <em>Hoekstra, A.Y., Chapagain, A.K., Aldaya, M.M. and Mekonnen, M.M. (2011) The water footprint assessment manual: Setting the global standard, Earthscan, London, UK</em>)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Why Water Footprint?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In a world where every person and their actions are monitored, we become a sum total of numbers such as our:</p>
+
+<ol>
+<li>BMI</li>
+<li>Credit Score</li>
+<li>Fitness Activity Record</li>
+</ol>
+
+<p>etc.</p>
+
+<p>Shouldn&#39;t we then be conscious of how much of the world&#39;s water resources we consume?</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>How to compute the Water Footprint ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>There are several categoties of water footprint as described by the <a href="http://waterfootprint.org/en/water-footprint/glossary/">Water Footprint Network</a></p>
+
+<ol>
+<li>Blue Water Footprint</li>
+<li>Green Water Footprint</li>
+<li>Grey Water Footprint</li>
+</ol>
+
+<p>etc.</p>
+
+<p>We calculate the water footprint for a consumer based on the amount of produce they consume in a week. We use the water footprint data  for each produce item computed by <a href="http://waterfootprint.org/media/downloads/Hoekstra-2008-WaterfootprintFood.pdf">Hoekstra</a> and multiply it by the amount of produce consumed in a week to get their total water consumption. The water footprint is given in the units of <strong>gal/lb</strong>. </p>
+
+<p><strong>Note:</strong> Depending on the type of water footprint, the units also change from <em>gal/lb</em> to <em>gal/hectare</em>, etc.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Example Calculation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>For example, let us say in one week, my family consumes: 2 lb of apples, 1.4 lb of bananas and 3.5 lb of tomatoes</p>
+
+<p>Then our waterfootprint is calculated as follows:</p>
+
+<pre><code class="r">a = 2; b = 1.4; t = 3.5
+wA &lt;- 83.88 # water footprint for apples in gal/lb
+wB &lt;- 103.05 # water footprint for bananas in gal/lb
+wT &lt;- 21.57 # water footprint for tomatoes in gal/lb
+
+totalWater &lt;- a*wA + b*wB + t*wT  
+totalPounds &lt;- a + b + t
+round(totalWater/totalPounds,0)
+</code></pre>
+
+<pre><code>## [1] 56
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='NA'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Why Water Footprint?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='How to compute the Water Footprint ?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example Calculation'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
